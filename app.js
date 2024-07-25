@@ -28,5 +28,5 @@ app.post("/add", addBlog);
 app.post('/posts/:id/delete', deletePost);
 
 app.listen(port, () => {
-    console.log(`Server ${port} numaralı port üzerinde çalışıyor.`);
+    console.log(`Server is running on port ${port}`);
 });
