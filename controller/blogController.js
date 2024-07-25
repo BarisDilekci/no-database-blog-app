@@ -1,47 +1,71 @@
-// blogController.js
-
 import fs from 'fs/promises';
 import path from 'path';
 
-let posts = [];
-const filePath = "post.json"; 
+const filePath = 'post.json';
 
+const readPostFile = async () => {
+    try {
+        const data = await fs.readFile(filePath, 'utf8');
+        return JSON.parse(data);
+    } catch (error) {
+        console.error(`File read error: ${error.message}`);
+        throw error;
+    }
+};
+
+const writePostsFile = async (data) => {
+    try {
+        await fs.writeFile(filePath, JSON.stringify(data, null, 2), 'utf8');
+    } catch (error) {
+        console.error(`File write error: ${error.message}`);
+        throw error;
+    }
+};
 
 export const addBlog = async (req, res) => {
     try {
         const { title, author, content } = req.body;
-        const newPost = { id: Date.now(), title, author, content, createdAt: new Date() };
+        const newPost = { id: Date.now().toString(), title, author, content, createdAt: new Date() };
 
-
-        try {
-            const data = await fs.readFile(filePath, 'utf8'); 
-            posts = JSON.parse(data);
-        } catch (error) {
-            console.error(`Dosya okuma hatası: ${error.message}`);
-        }
+        const posts = await readPostFile();
 
         posts.unshift(newPost);
 
-        await fs.writeFile(filePath, JSON.stringify(posts, null, 2), 'utf8'); 
+        await writePostsFile(posts);
 
-        res.status(201).json(newPost);
+        res.redirect('/');
     } catch (error) {
-        console.error(`Sunucu hatası: ${error.message}`);
-        res.status(500).json({ message: 'Sunucu hatası' });
+        console.error(`Server error: ${error.message}`);
+        res.status(500).json({ message: 'Server error' });
     }
 };
 
-
 export const getAllBlogData = async (req, res) => {
     try {
-        const data = await fs.readFile(filePath, 'utf-8');
-        const posts = JSON.parse(data); // posts verisini al
+        const posts = await readPostFile();
 
         res.render('index', {
-            posts 
+            posts
         });
     } catch (error) {
-        console.error(`Dosya okuma hatası: ${error.message}`);
-        res.status(500).send('Dosya okuma hatası');
+        console.error(`File read error: ${error.message}`);
+        res.status(500).send('File read error');
+    }
+};
+
+export const deletePost = async (req, res) => {
+    try {
+        const postId = req.params.id.toString();
+
+        const posts = await readPostFile();
+
+        const updatedPosts = posts.filter(post => post.id.toString() !== postId);
+
+        await writePostsFile(updatedPosts);
+
+        res.redirect('/');
+    } catch (error) {
+        console.error('Error during deletion: ', error);
+        res.status(500).send('An error occurred.');
     }
 };

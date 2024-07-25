@@ -1,6 +1,6 @@
 import express from 'express';
 import fs from 'fs';
-import { addBlog, getAllBlogData } from './controller/blogController.js';
+import { addBlog, deletePost, getAllBlogData } from './controller/blogController.js';
 import * as routerController from './controller/routeController.js';
 
 const app = express();
@@ -24,6 +24,8 @@ app.get('/', getAllBlogData);
 app.get('/add', routerController.getAddPage);
 
 app.post("/add", addBlog);
+
+app.post('/posts/:id/delete', deletePost);
 
 app.listen(port, () => {
     console.log(`Server ${port} numaralı port üzerinde çalışıyor.`);

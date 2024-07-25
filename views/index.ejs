@@ -11,20 +11,27 @@
 
     <main class="blog-posts">
         <% if (posts.length > 0) { %>
-            <ul class="post-list">
+            <ul class="list-group">
                 <% posts.forEach(post => { %>
-                    <li class="post-item">
+                    <li class="list-group-item">
                         <article class="post">
                             <h2 class="post-title"><%= post.title %></h2>
-                            <p class="post-meta"> Yazar: <%= post.author %></p>
+                            <p class="post-meta">Yazar: <%= post.author %></p>
                             <div class="post-content">
                                 <p><%= post.content %></p>
                             </div>
-                            <p class="post-date" style="color: gray;"> Yayınlanma Tarihi: <%= post.createdAt %></p>
-                 
+                            <p class="post-date text-muted">Yayınlanma Tarihi: <%= post.createdAt %></p>
+                            
+                            <!-- Silme Butonu -->
+                            <form action="/posts/<%= post.id %>/delete" method="POST" style="display:inline;">
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Bu yazıyı silmek istediğinizden emin misiniz?');">
+                                    Sil
+                                </button>
+                            </form>
+                            
                         </article>
                     </li>
-                    <hr>
+                    <hr class="my-4">
                 <% }); %>
             </ul>
         <% } else { %>
