@@ -1,0 +1,36 @@
+<%- include('partials/header', { pageTitle: 'Ana Sayfa' }) %>
+
+<!-- Ana İçerik Alanı -->
+<div class="container">
+    <header class="blog-header">
+        <h1>Hoş Geldiniz!</h1>
+        <p>Burada güncel blog içeriklerini bulabilirsiniz.</p>
+    </header>
+
+    <br>
+
+    <main class="blog-posts">
+        <% if (posts.length > 0) { %>
+            <ul class="post-list">
+                <% posts.forEach(post => { %>
+                    <li class="post-item">
+                        <article class="post">
+                            <h2 class="post-title"><%= post.title %></h2>
+                            <p class="post-meta"> Yazar: <%= post.author %></p>
+                            <div class="post-content">
+                                <p><%= post.content %></p>
+                            </div>
+                            <p class="post-date" style="color: gray;"> Yayınlanma Tarihi: <%= post.createdAt %></p>
+                 
+                        </article>
+                    </li>
+                    <hr>
+                <% }); %>
+            </ul>
+        <% } else { %>
+            <p>Henüz blog yazısı bulunmuyor.</p>
+        <% } %>
+    </main>
+</div>
+
+<%- include('partials/footer') %>

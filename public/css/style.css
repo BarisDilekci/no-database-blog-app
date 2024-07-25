@@ -1,0 +1,47 @@
+/* styles.css */
+
+/* Genel Stil Ayarları */
+body {
+  background-color: #f8f9fa; /* Arka plan rengi */
+  font-family: Arial, sans-serif; /* Genel font */
+  color: #333; /* Metin rengi */
+  margin: 0;
+  padding: 0;
+}
+
+/* Konteyner Stil Ayarları */
+.container {
+  background-color: #fff; /* Arka plan rengi */
+  padding: 30px; /* İçerik dolgusu */
+  border-radius: 8px; /* Köşe yuvarlama */
+  box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Gölgelendirme */
+  max-width: 1200px; /* Maksimum genişlik */
+  margin: 20px auto; /* Üst ve alt boşluk, ortalanmış */
+}
+
+/* Formlar için Stil Ayarları */
+form {
+  max-width: 600px; /* Maksimum genişlik */
+  margin: auto; /* Ortalanmış */
+}
+
+/* Buton Stil Ayarları */
+.btn-primary {
+  background-color: #007bff; /* Arka plan rengi */
+  border-color: #007bff; /* Kenar rengi */
+  color: #fff; /* Metin rengi */
+  padding: 10px 20px; /* İçerik dolgusu */
+  border: 1px solid transparent; /* Kenar stili */
+  border-radius: 4px; /* Köşe yuvarlama */
+  text-align: center; /* Metin hizalama */
+  text-decoration: none; /* Alt çizgi yok */
+  display: inline-block; /* Yan yana yerleşim */
+  font-size: 16px; /* Font boyutu */
+  cursor: pointer; /* İmleç tipi */
+}
+
+.btn-primary:hover {
+  background-color: #0069d9; /* Üzerine gelindiğinde arka plan rengi */
+  border-color: #0062cc; /* Üzerine gelindiğinde kenar rengi */
+  text-decoration: none; /* Alt çizgi yok */
+}
